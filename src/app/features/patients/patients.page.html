@@ -8,6 +8,17 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
+  <!-- Avatar y Nombre -->
+  <div class="avatar-container">
+    <div class="avatar-wrapper" (click)="changeAvatar()">
+      <img [src]="patient.avatar" alt="Avatar del paciente" class="patient-avatar">
+      <div class="avatar-overlay">
+        <ion-icon name="camera"></ion-icon>
+      </div>
+    </div>
+    <h1 class="patient-name">{{ patient.name }}</h1>
+  </div>
+
   <!-- Datos Personales -->
   <ion-card>
     <ion-card-header>
@@ -33,6 +44,145 @@
             <p>{{ patient.phone }}</p>
           </ion-label>
         </ion-item>
+        <ion-item>
+          <ion-label>
+            <h2>Email</h2>
+            <p>{{ patient.email }}</p>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            <h2>Dirección</h2>
+            <p>{{ patient.address }}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Contacto de Emergencia -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Contacto de Emergencia</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list lines="none">
+        <ion-item>
+          <ion-label>
+            <h2>Nombre</h2>
+            <p>{{ patient.emergencyContact.name }}</p>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            <h2>Teléfono</h2>
+            <p>{{ patient.emergencyContact.phone }}</p>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            <h2>Relación</h2>
+            <p>{{ patient.emergencyContact.relationship }}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Historial Médico -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Historial Médico</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list lines="none">
+        <ion-item>
+          <ion-label>
+            <h2>Alergias</h2>
+            <p>{{ patient.medicalHistory.allergies.join(', ') || 'Ninguna' }}</p>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            <h2>Medicamentos</h2>
+            <p>{{ patient.medicalHistory.medications.join(', ') || 'Ninguno' }}</p>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            <h2>Enfermedades Crónicas</h2>
+            <p>{{ patient.medicalHistory.chronicDiseases.join(', ') || 'Ninguna' }}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Historial Dental -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Historial Dental</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list lines="none">
+        <ion-item>
+          <ion-label>
+            <h2>Último Control</h2>
+            <p>{{ patient.dentalHistory.lastCheckup }}</p>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            <h2>Tratamientos Previos</h2>
+            <p>{{ patient.dentalHistory.previousTreatments.join(', ') || 'Ninguno' }}</p>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            <h2>Hábitos Dentales</h2>
+            <p>{{ patient.dentalHistory.dentalHabits.join(', ') || 'No especificado' }}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Información del Seguro -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Información del Seguro</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list lines="none">
+        <ion-item>
+          <ion-label>
+            <h2>Proveedor</h2>
+            <p>{{ patient.insurance.provider }}</p>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            <h2>Número de Póliza</h2>
+            <p>{{ patient.insurance.policyNumber }}</p>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            <h2>Cobertura</h2>
+            <p>{{ patient.insurance.coverage }}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Diagnóstico y Estado -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Diagnóstico y Estado</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list lines="none">
         <ion-item>
           <ion-label>
             <h2>Diagnóstico Actual</h2>

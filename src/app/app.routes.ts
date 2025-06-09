@@ -17,7 +17,7 @@ export const routes: Routes = [
         loadComponent: () => import('./features/appointments/appointments.page').then(m => m.AppointmentsPage)
       },
       {
-        path: 'paciente-ficha',
+        path: 'paciente-ficha/:id',
         loadComponent: () => import('./features/patients/patients.page').then(m => m.PatientsPage)
       },
       {
