@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Ajustes</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-list>
+    <ion-item>
+      <ion-label>Notificaciones</ion-label>
+      <ion-toggle [(ngModel)]="settings.notifications"></ion-toggle>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Modo Oscuro</ion-label>
+      <ion-toggle [(ngModel)]="settings.darkMode" (ionChange)="onDarkModeChange()"></ion-toggle>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Idioma</ion-label>
+      <ion-select [(ngModel)]="settings.language">
+        <ion-select-option value="es">Español</ion-select-option>
+        <ion-select-option value="en">English</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Tamaño de Fuente</ion-label>
+      <ion-select [(ngModel)]="settings.fontSize">
+        <ion-select-option value="small">Pequeño</ion-select-option>
+        <ion-select-option value="medium">Mediano</ion-select-option>
+        <ion-select-option value="large">Grande</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+
+  <ion-button expand="block" class="ion-margin-top" (click)="saveSettings()">
+    Guardar Ajustes
+  </ion-button>
+
+  <!-- Información de la app -->
+  <div class="app-info">
+    <ion-text color="medium">
+      <p>Clínica Dental App v1.0.0</p>
+    </ion-text>
+  </div>
+</ion-content> 

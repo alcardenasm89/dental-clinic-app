@@ -1,0 +1,59 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Mi Perfil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="profile-container">
+    <!-- Foto de perfil y nombre -->
+    <div class="profile-header">
+      <ion-avatar class="profile-avatar">
+        <img [src]="professional.profileImage" alt="Foto de perfil">
+      </ion-avatar>
+      <h1 class="profile-name">{{ professional.name }}</h1>
+      <p class="profile-specialty">{{ professional.specialty }}</p>
+      <p class="profile-experience">
+        {{ professional.experience }} {{ getExperienceText(professional.experience) }}
+      </p>
+    </div>
+
+    <!-- Información de contacto -->
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Información de Contacto</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-list lines="none">
+          <ion-item>
+            <ion-icon name="mail-outline" slot="start"></ion-icon>
+            <ion-label>
+              <h2>Correo Electrónico</h2>
+              <p>{{ professional.email }}</p>
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="call-outline" slot="start"></ion-icon>
+            <ion-label>
+              <h2>Teléfono</h2>
+              <p>{{ professional.phone }}</p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Botón de cerrar sesión -->
+    <ion-button 
+      expand="block" 
+      color="danger" 
+      class="logout-button"
+      (click)="logout()">
+      <ion-icon name="log-out-outline" slot="start"></ion-icon>
+      Cerrar Sesión
+    </ion-button>
+  </div>
+</ion-content> 

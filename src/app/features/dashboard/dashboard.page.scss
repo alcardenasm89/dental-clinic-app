@@ -1,0 +1,42 @@
+ion-card {
+  margin: 16px 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+ion-card-header {
+  padding: 16px;
+}
+
+ion-card-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--ion-color-primary);
+}
+
+ion-card-subtitle {
+  font-size: 14px;
+  color: var(--ion-color-medium);
+}
+
+ion-list {
+  padding: 0;
+}
+
+ion-item {
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --padding-top: 12px;
+  --padding-bottom: 12px;
+  
+  h2 {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--ion-color-dark);
+  }
+  
+  p {
+    font-size: 14px;
+    color: var(--ion-color-medium);
+  }
+} 

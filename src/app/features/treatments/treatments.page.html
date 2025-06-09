@@ -1,0 +1,47 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Tratamientos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-list>
+    <ion-card *ngFor="let treatment of treatments" [class.completed]="treatment.status === 'completed'">
+      <ion-card-header>
+        <ion-card-subtitle>{{ treatment.patient }}</ion-card-subtitle>
+        <ion-card-title>{{ treatment.name }}</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <p>{{ treatment.description }}</p>
+        
+        <div class="treatment-details">
+          <ion-badge [color]="getStatusColor(treatment.status)">
+            {{ getStatusText(treatment.status) }}
+          </ion-badge>
+          <span class="date">{{ treatment.date | date:'dd/MM/yyyy' }}</span>
+        </div>
+
+        <ion-button 
+          expand="block" 
+          [color]="treatment.status === 'completed' ? 'success' : 'primary'"
+          [disabled]="treatment.status === 'completed'"
+          (click)="markAsCompleted(treatment, $event)"
+          class="ion-margin-top">
+          <ion-icon name="checkmark-circle" slot="start"></ion-icon>
+          {{ treatment.status === 'completed' ? 'Completado' : 'Marcar como Completado' }}
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+
+  <!-- Mensaje si no hay tratamientos -->
+  <div class="no-treatments" *ngIf="treatments.length === 0">
+    <ion-text color="medium">
+      <p>No hay tratamientos activos</p>
+    </ion-text>
+  </div>
+</ion-content> 

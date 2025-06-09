@@ -1,0 +1,57 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Dashboard</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <!-- Tarjetas de estadísticas -->
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" sizeMd="4">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-subtitle>Citas Hoy</ion-card-subtitle>
+            <ion-card-title>{{ stats.todayAppointments }}</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+      <ion-col size="12" sizeMd="4">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-subtitle>Tratamientos Pendientes</ion-card-subtitle>
+            <ion-card-title>{{ stats.pendingTreatments }}</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+      <ion-col size="12" sizeMd="4">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-subtitle>Pacientes Activos</ion-card-subtitle>
+            <ion-card-title>{{ stats.activePatients }}</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <!-- Próximas citas -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Próximas Citas</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let appointment of recentAppointments">
+          <ion-label>
+            <h2>{{ appointment.time }} - {{ appointment.patient }}</h2>
+            <p>{{ appointment.treatment }}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</ion-content> 

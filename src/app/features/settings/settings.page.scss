@@ -1,0 +1,73 @@
+ion-content {
+  --background: var(--ion-color-light);
+}
+
+ion-list {
+  background: white;
+  border-radius: 12px;
+  margin: 16px 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+ion-item {
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --inner-padding-end: 16px;
+  --background: transparent;
+  --border-color: var(--ion-color-light-shade);
+}
+
+ion-item:last-child {
+  --border-color: transparent;
+}
+
+ion-icon {
+  font-size: 1.5rem;
+  color: var(--ion-color-primary);
+  margin-right: 16px;
+}
+
+ion-label {
+  h2 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--ion-color-dark);
+    margin-bottom: 4px;
+  }
+
+  p {
+    font-size: 0.9rem;
+    color: var(--ion-color-medium);
+    margin: 0;
+  }
+}
+
+ion-toggle {
+  --background: var(--ion-color-light-shade);
+  --background-checked: var(--ion-color-primary);
+  --handle-background: white;
+  --handle-background-checked: white;
+  padding: 12px;
+}
+
+ion-select {
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --placeholder-color: var(--ion-color-medium);
+  --placeholder-opacity: 1;
+  width: 100%;
+  max-width: 200px;
+  text-align: right;
+}
+
+.app-info {
+  text-align: center;
+  padding: 24px 16px;
+  
+  p {
+    font-size: 0.9rem;
+    color: var(--ion-color-medium);
+    margin: 0;
+  }
+} 

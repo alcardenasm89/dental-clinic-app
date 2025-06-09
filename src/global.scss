@@ -35,3 +35,154 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import '@ionic/angular/css/palettes/dark.system.css';
+
+/* Estilos globales */
+:root {
+  --safe-area-top: env(safe-area-inset-top);
+  --safe-area-bottom: env(safe-area-inset-bottom);
+  --safe-area-left: env(safe-area-inset-left);
+  --safe-area-right: env(safe-area-inset-right);
+}
+
+/* Ajustes generales */
+ion-content {
+  --background: var(--ion-color-light);
+  --padding-start: var(--app-padding);
+  --padding-end: var(--app-padding);
+  --padding-top: var(--app-padding);
+  --padding-bottom: var(--app-padding);
+}
+
+ion-header {
+  ion-toolbar {
+    --background: white;
+    --border-color: var(--ion-color-light-shade);
+    --padding-start: var(--app-padding);
+    --padding-end: var(--app-padding);
+  }
+
+  ion-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--ion-color-dark);
+  }
+}
+
+/* Estilos de tarjetas */
+ion-card {
+  margin: 16px 0;
+  border-radius: var(--app-border-radius);
+  box-shadow: var(--app-card-shadow);
+  background: white;
+}
+
+ion-card-header {
+  padding: 16px;
+  background: var(--ion-color-light);
+  border-bottom: 1px solid var(--ion-color-light-shade);
+}
+
+ion-card-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--ion-color-dark);
+}
+
+ion-card-content {
+  padding: 16px;
+}
+
+/* Estilos de listas */
+ion-list {
+  background: transparent;
+  padding: 0;
+}
+
+ion-item {
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --inner-padding-end: 16px;
+  --background: transparent;
+  --border-color: var(--ion-color-light-shade);
+  margin: 8px 0;
+  border-radius: 8px;
+}
+
+/* Estilos de botones */
+ion-button {
+  --border-radius: 8px;
+  --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-weight: 500;
+  margin: 8px 0;
+}
+
+/* Estilos de formularios */
+ion-input, ion-textarea {
+  --background: var(--ion-color-light);
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --padding-top: 12px;
+  --padding-bottom: 12px;
+  border-radius: 8px;
+  margin: 8px 0;
+}
+
+/* Estilos de badges */
+ion-badge {
+  font-size: 0.8rem;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+/* Estilos de iconos */
+ion-icon {
+  font-size: 1.2rem;
+  color: var(--ion-color-primary);
+}
+
+/* Ajustes para dispositivos móviles */
+@media (max-width: 576px) {
+  :root {
+    --app-padding: 12px;
+  }
+
+  ion-card {
+    margin: 12px 0;
+  }
+
+  ion-item {
+    --padding-start: 12px;
+    --padding-end: 12px;
+    --inner-padding-end: 12px;
+  }
+}
+
+/* Ajustes para modo oscuro */
+@media (prefers-color-scheme: dark) {
+  ion-content {
+    --background: var(--ion-color-dark);
+  }
+
+  ion-header ion-toolbar {
+    --background: var(--ion-color-dark);
+    --border-color: var(--ion-color-dark-shade);
+  }
+
+  ion-card {
+    --background: var(--ion-color-dark);
+  }
+
+  ion-card-header {
+    --background: var(--ion-color-dark-shade);
+    --border-color: var(--ion-color-dark-tint);
+  }
+
+  ion-item {
+    --background: var(--ion-color-dark-shade);
+    --border-color: var(--ion-color-dark-tint);
+  }
+
+  ion-input, ion-textarea {
+    --background: var(--ion-color-dark-shade);
+  }
+}

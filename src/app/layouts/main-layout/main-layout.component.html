@@ -1,0 +1,60 @@
+<ion-app>
+  <ion-split-pane contentId="main-content">
+    <!-- Menú lateral -->
+    <ion-menu contentId="main-content" type="overlay">
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Clínica Dental</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <!-- Logo y nombre de la clínica -->
+        <div class="menu-header">
+          <ion-avatar class="menu-logo">
+            <img src="assets/icon/logo.png" alt="Logo Clínica Dental">
+          </ion-avatar>
+          <h2>Clínica Dental</h2>
+          <p>Sistema de Gestión</p>
+        </div>
+
+        <!-- Lista de opciones del menú -->
+        <ion-list>
+          <ion-menu-toggle auto-hide="false">
+            <ion-item
+              *ngFor="let page of appPages"
+              [routerLink]="[page.url]"
+              routerDirection="root"
+              routerLinkActive="selected"
+              detail="false">
+              <ion-icon slot="start" [name]="page.icon"></ion-icon>
+              <ion-label>{{ page.title }}</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+        </ion-list>
+
+        <!-- Información de la app -->
+        <div class="menu-footer">
+          <ion-text color="medium">
+            <p>Versión 1.0.0</p>
+          </ion-text>
+        </div>
+      </ion-content>
+    </ion-menu>
+
+    <!-- Contenido principal -->
+    <div class="ion-page" id="main-content">
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+          </ion-buttons>
+          <ion-title>Clínica Dental</ion-title>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content class="ion-padding">
+        <ion-router-outlet></ion-router-outlet>
+      </ion-content>
+    </div>
+  </ion-split-pane>
+</ion-app> 
