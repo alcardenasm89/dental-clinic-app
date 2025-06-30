@@ -138,4 +138,12 @@ ion-spinner {
   font-size: 0.9rem;
   margin-top: 4px;
   padding-left: 16px;
+}
+
+.invalid-item {
+  --highlight-background: var(--ion-color-danger-tint);
+  --highlight-color-focused: var(--ion-color-danger);
+  border-bottom: 2px solid var(--ion-color-danger);
+  background: #fff6f6;
+  border-radius: 8px;
 } 

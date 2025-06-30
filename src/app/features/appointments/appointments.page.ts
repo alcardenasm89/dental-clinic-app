@@ -3,14 +3,7 @@ import { CommonModule } from '@angular/common';
 import { IonicModule, AnimationController } from '@ionic/angular';
 import { RouterModule, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-
-interface Appointment {
-  id: number;
-  name: string;
-  time: string;
-  reason: string;
-  status: 'confirmed' | 'pending';
-}
+import { AppointmentsService, Appointment } from '../../core/services/appointments.service';
 
 @Component({
   selector: 'app-appointments',
@@ -23,52 +16,18 @@ export class AppointmentsPage implements OnInit {
   public selectedDate: string = new Date().toISOString();
   public appointments: Appointment[] = [];
   public isAddingAppointment = false;
+  public newAppointment: Partial<Appointment> = {};
 
-  constructor(private animationCtrl: AnimationController, private router: Router) {}
+  constructor(
+    private animationCtrl: AnimationController,
+    private router: Router,
+    private appointmentsService: AppointmentsService
+  ) {}
 
   ngOnInit() {
-    this.loadAppointments();
-  }
-
-  private loadAppointments() {
-    // Simulación de datos de pacientes
-    this.appointments = [
-      {
-        id: 1,
-        name: 'Juan Pérez',
-        time: '09:00',
-        reason: 'Limpieza dental',
-        status: 'confirmed'
-      },
-      {
-        id: 2,
-        name: 'María García',
-        time: '10:30',
-        reason: 'Ortodoncia',
-        status: 'confirmed'
-      },
-      {
-        id: 3,
-        name: 'Carlos López',
-        time: '11:45',
-        reason: 'Extracción de muela',
-        status: 'pending'
-      },
-      {
-        id: 4,
-        name: 'Ana Martínez',
-        time: '13:00',
-        reason: 'Revisión de brackets',
-        status: 'confirmed'
-      },
-      {
-        id: 5,
-        name: 'Roberto Sánchez',
-        time: '14:30',
-        reason: 'Blanqueamiento',
-        status: 'pending'
-      }
-    ];
+    this.appointmentsService.getAppointments().subscribe(appointments => {
+      this.appointments = appointments;
+    });
   }
 
   // Animación para mostrar/ocultar el formulario de nueva cita
@@ -119,7 +78,18 @@ export class AppointmentsPage implements OnInit {
   }
 
   addAppointment() {
-    // Aquí iría la lógica para agregar una nueva cita
-    console.log('Agregar nueva cita');
+    if (this.newAppointment.name && this.newAppointment.reason && this.newAppointment.time) {
+      const newId = Math.max(0, ...this.appointments.map(a => a.id)) + 1;
+      const appointment: Appointment = {
+        id: newId,
+        name: this.newAppointment.name,
+        reason: this.newAppointment.reason,
+        time: this.newAppointment.time,
+        status: 'pending'
+      };
+      this.appointmentsService.addAppointment(appointment);
+      this.newAppointment = {};
+      this.isAddingAppointment = false;
+    }
   }
 } 

@@ -16,7 +16,7 @@
 
       <ion-card-content>
         <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-          <ion-item>
+          <ion-item [class.invalid-item]="email?.invalid && (email?.touched || loginForm.submitted)">
             <ion-label position="floating">Email</ion-label>
             <ion-input 
               type="email" 
@@ -24,14 +24,14 @@
               placeholder="doctor@clinicadental.com">
             </ion-input>
           </ion-item>
-          <ion-note color="danger" *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.errors?.['required']">
+          <ion-note color="danger" *ngIf="email?.invalid && (email?.touched || loginForm.submitted) && email?.errors?.['required']">
             El email es requerido
           </ion-note>
-          <ion-note color="danger" *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.errors?.['email']">
+          <ion-note color="danger" *ngIf="email?.invalid && (email?.touched || loginForm.submitted) && email?.errors?.['email']">
             Ingrese un email válido
           </ion-note>
 
-          <ion-item>
+          <ion-item [class.invalid-item]="password?.invalid && (password?.touched || loginForm.submitted)">
             <ion-label position="floating">Contraseña</ion-label>
             <ion-input 
               type="password" 
@@ -39,10 +39,10 @@
               placeholder="123456">
             </ion-input>
           </ion-item>
-          <ion-note color="danger" *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.errors?.['required']">
+          <ion-note color="danger" *ngIf="password?.invalid && (password?.touched || loginForm.submitted) && password?.errors?.['required']">
             La contraseña es requerida
           </ion-note>
-          <ion-note color="danger" *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.errors?.['minlength']">
+          <ion-note color="danger" *ngIf="password?.invalid && (password?.touched || loginForm.submitted) && password?.errors?.['minlength']">
             La contraseña debe tener al menos 6 caracteres
           </ion-note>
 

@@ -66,6 +66,15 @@ export class LoginPage implements OnInit {
           await toast.present();
         }
       });
+    } else {
+      this.markFormGroupTouched(this.loginForm);
+      const toast = await this.toastCtrl.create({
+        message: 'Por favor, corrige los errores en el formulario.',
+        duration: 2000,
+        color: 'warning',
+        position: 'top'
+      });
+      await toast.present();
     }
   }
 
