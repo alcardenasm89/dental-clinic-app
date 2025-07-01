@@ -16,6 +16,7 @@ import { AuthService } from '../../../core/services/auth.service';
 export class LoginPage implements OnInit {
   loginForm: FormGroup;
   isLoading = false;
+  submitted = false;
 
   constructor(
     private fb: FormBuilder,
@@ -33,6 +34,7 @@ export class LoginPage implements OnInit {
   ngOnInit() {}
 
   async onSubmit() {
+    this.submitted = true;
     if (this.loginForm.valid) {
       this.isLoading = true;
       const loading = await this.loadingCtrl.create({
