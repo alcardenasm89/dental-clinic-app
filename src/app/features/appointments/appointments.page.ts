@@ -4,6 +4,7 @@ import { IonicModule, AnimationController } from '@ionic/angular';
 import { RouterModule, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AppointmentsService, Appointment } from '../../core/services/appointments.service';
+import { PatientsService, Patient } from '../../core/services/patients.service';
 
 @Component({
   selector: 'app-appointments',
@@ -21,12 +22,20 @@ export class AppointmentsPage implements OnInit {
   constructor(
     private animationCtrl: AnimationController,
     private router: Router,
-    private appointmentsService: AppointmentsService
+    private appointmentsService: AppointmentsService,
+    private patientsService: PatientsService
   ) {}
 
   ngOnInit() {
-    this.appointmentsService.getAppointments().subscribe(appointments => {
-      this.appointments = appointments;
+    // Sincronizar agenda con pacientes reales
+    this.patientsService.getPatients().subscribe((patients: Patient[]) => {
+      this.appointments = patients.map((patient, idx) => ({
+        id: patient.id,
+        name: patient.name,
+        reason: 'Consulta general',
+        time: `${9 + idx}:00`,
+        status: 'confirmed'
+      }));
     });
   }
 
