@@ -1,0 +1,142 @@
+.avatar-container {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.avatar-wrapper {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-bottom: 10px;
+  
+  &:hover .avatar-overlay {
+    opacity: 1;
+  }
+}
+
+.patient-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--ion-color-primary);
+}
+
+.avatar-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: 50%;
+  
+  ion-icon {
+    color: white;
+    font-size: 24px;
+  }
+}
+
+.patient-name {
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--ion-color-dark);
+  margin: 0;
+}
+
+.location-section {
+  .location-info {
+    margin-top: 16px;
+    padding: 12px;
+    background: var(--ion-color-light);
+    border-radius: 8px;
+    
+    p {
+      margin: 4px 0;
+      font-size: 14px;
+    }
+  }
+  
+  ion-button {
+    margin-bottom: 8px;
+  }
+}
+
+ion-card {
+  margin-bottom: 16px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+ion-card-header {
+  background: var(--ion-color-light);
+  border-bottom: 1px solid var(--ion-color-light-shade);
+}
+
+ion-card-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--ion-color-primary);
+}
+
+ion-item {
+  --padding-start: 0;
+  --inner-padding-end: 0;
+  
+  h2 {
+    font-weight: 600;
+    color: var(--ion-color-dark);
+    margin-bottom: 4px;
+  }
+  
+  p {
+    color: var(--ion-color-medium);
+    margin: 0;
+  }
+}
+
+ion-badge {
+  font-size: 12px;
+  padding: 4px 8px;
+}
+
+ion-textarea {
+  --padding-start: 0;
+  --padding-end: 0;
+  margin-top: 16px;
+}
+
+// Estilos para modo oscuro
+@media (prefers-color-scheme: dark) {
+  .patient-name {
+    color: var(--ion-color-light);
+  }
+  
+  .location-section .location-info {
+    background: var(--ion-color-dark-shade);
+  }
+  
+  ion-card {
+    background: var(--ion-color-dark);
+    color: var(--ion-color-light);
+  }
+  
+  ion-card-header {
+    background: var(--ion-color-dark-shade);
+  }
+  
+  ion-item h2 {
+    color: var(--ion-color-light);
+  }
+  
+  ion-item p {
+    color: var(--ion-color-light-shade);
+  }
+} 

@@ -16,7 +16,7 @@ ion-item-divider {
 }
 
 ion-item {
-  --background: white;
+  --background: var(--ion-color-light);
   --padding-start: 16px;
   --padding-end: 16px;
   --inner-padding-end: 16px;
@@ -60,7 +60,9 @@ ion-badge {
 }
 
 ion-datetime {
-  --background: white;
+  --background: var(--ion-color-light);
+  --color: var(--ion-color-dark);
+  --placeholder-color: var(--ion-color-medium);
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin: 8px 0;
@@ -70,14 +72,63 @@ ion-card {
   margin: 16px 0;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --background: var(--ion-color-light);
 }
 
 ion-card-header {
   padding: 16px;
+  --background: var(--ion-color-light-shade);
 }
 
 ion-card-title {
   font-size: 20px;
   font-weight: 600;
   color: var(--ion-color-primary);
+}
+
+// Estilos para modo oscuro
+@media (prefers-color-scheme: dark) {
+  ion-content {
+    --background: var(--ion-color-dark);
+  }
+
+  ion-item-divider {
+    --background: var(--ion-color-dark-shade);
+    --color: var(--ion-color-light-shade);
+  }
+
+  ion-item {
+    --background: var(--ion-color-dark-shade);
+    --color: var(--ion-color-light);
+    
+    h2 {
+      color: var(--ion-color-light);
+    }
+    
+    p {
+      color: var(--ion-color-light-shade);
+    }
+  }
+
+  ion-datetime {
+    --background: var(--ion-color-dark-shade);
+    --color: var(--ion-color-light);
+    --placeholder-color: var(--ion-color-light-shade);
+  }
+
+  ion-card {
+    --background: var(--ion-color-dark-shade);
+  }
+
+  ion-card-header {
+    --background: var(--ion-color-dark-tint);
+  }
+
+  .no-appointments p {
+    color: var(--ion-color-light-shade);
+  }
+
+  .duration {
+    color: var(--ion-color-light-shade);
+  }
 } 

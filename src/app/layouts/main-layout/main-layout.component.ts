@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, MenuController } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 
 interface MenuItem {
@@ -24,6 +24,11 @@ export class MainLayoutComponent {
       icon: 'calendar'
     },
     {
+      title: 'Pacientes',
+      url: '/app/pacientes',
+      icon: 'person'
+    },
+    {
       title: 'Tratamientos',
       url: '/app/tratamientos',
       icon: 'medical'
@@ -40,5 +45,31 @@ export class MainLayoutComponent {
     }
   ];
 
-  constructor() {}
+  constructor(private menuCtrl: MenuController) {}
+
+  ionViewDidEnter() {
+    // Mejorar la accesibilidad del menú
+    this.setupMenuAccessibility();
+  }
+
+  private setupMenuAccessibility() {
+    // Agregar atributos ARIA apropiados al menú
+    const menuElement = document.querySelector('ion-menu');
+    if (menuElement) {
+      menuElement.setAttribute('aria-label', 'Menú principal de navegación');
+    }
+
+    // Configurar el manejo de foco
+    this.menuCtrl.enable(true);
+  }
+
+  async onMenuOpen() {
+    // Cuando el menú se abre, asegurar que el foco esté en el primer elemento
+    setTimeout(() => {
+      const firstMenuItem = document.querySelector('ion-menu ion-item');
+      if (firstMenuItem) {
+        (firstMenuItem as HTMLElement).focus();
+      }
+    }, 100);
+  }
 } 

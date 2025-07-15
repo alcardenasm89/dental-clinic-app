@@ -20,6 +20,11 @@
     </ion-item>
 
     <ion-item>
+      <ion-label>Modo Automático</ion-label>
+      <ion-toggle [(ngModel)]="settings.autoDarkMode" (ionChange)="onAutoDarkModeChange()"></ion-toggle>
+    </ion-item>
+
+    <ion-item>
       <ion-label>Idioma</ion-label>
       <ion-select [(ngModel)]="settings.language">
         <ion-select-option value="es">Español</ion-select-option>
@@ -40,6 +45,19 @@
   <ion-button expand="block" class="ion-margin-top" (click)="saveSettings()">
     Guardar Ajustes
   </ion-button>
+
+  <!-- Sección de Seguridad -->
+  <ion-list class="ion-margin-top">
+    <ion-list-header>
+      <ion-label>Seguridad</ion-label>
+    </ion-list-header>
+    
+    <ion-item button (click)="showChangePasswordModal()">
+      <ion-icon name="lock-closed" slot="start"></ion-icon>
+      <ion-label>Cambiar Contraseña</ion-label>
+      <ion-icon name="chevron-forward" slot="end"></ion-icon>
+    </ion-item>
+  </ion-list>
 
   <!-- Información de la app -->
   <div class="app-info">

@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonicModule, AnimationController, ActionSheetController } from '@ionic/angular';
+import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { PatientsService, Patient } from '../../core/services/patients.service';
-import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 
 @Component({
   selector: 'app-patients',
@@ -14,170 +13,39 @@ import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
   imports: [CommonModule, IonicModule, FormsModule]
 })
 export class PatientsPage implements OnInit {
-  public patient: Patient = {
-    id: 0,
-    name: '',
-    age: 0,
-    phone: '',
-    email: '',
-    address: '',
-    avatar: 'assets/default-avatar.png',
-    emergencyContact: {
-      name: '',
-      phone: '',
-      relationship: ''
-    },
-    medicalHistory: {
-      allergies: [],
-      medications: [],
-      chronicDiseases: []
-    },
-    dentalHistory: {
-      lastCheckup: '',
-      previousTreatments: [],
-      dentalHabits: []
-    },
-    diagnosis: '',
-    treatmentStatus: 'pending',
-    evolutionNotes: [],
-    insurance: {
-      provider: '',
-      policyNumber: '',
-      coverage: ''
-    }
-  };
-
-  public newNote: string = '';
+  patients: Patient[] = [];
+  loading = false;
 
   constructor(
-    private route: ActivatedRoute,
-    private animationCtrl: AnimationController,
-    private actionSheetCtrl: ActionSheetController,
-    private patientsService: PatientsService
+    private patientsService: PatientsService,
+    private router: Router
   ) {}
 
   ngOnInit() {
-    // Obtener el ID del paciente de la URL
-    const patientId = Number(this.route.snapshot.paramMap.get('id'));
-    this.patientsService.getPatientById(patientId).subscribe(patient => {
-      if (patient) {
-        this.patient = { ...patient };
+    this.loadPatients();
+  }
+
+  loadPatients(event?: any) {
+    this.loading = true;
+    this.patientsService.getPatients().subscribe(patients => {
+      this.patients = patients;
+      this.loading = false;
+      if (event) {
+        event.target.complete();
       }
-      // Aplicar animación después de cargar los datos
-      setTimeout(() => {
-        this.playLoadAnimation();
-      }, 100);
     });
   }
 
-  private playLoadAnimation() {
-    const element = document.querySelector('.profile-container');
-    if (element) {
-      const animation = this.animationCtrl.create()
-        .addElement(element)
-        .duration(800)
-        .easing('ease-out')
-        .fromTo('opacity', 0, 1)
-        .fromTo('transform', 'scale(0.95)', 'scale(1)');
-
-      animation.play();
-    }
+  syncPatients(event?: any) {
+    this.loading = true;
+    this.patientsService.fetchPatientsFromApi();
+    // Esperar a que se actualicen los pacientes
+    setTimeout(() => {
+      this.loadPatients(event);
+    }, 1200);
   }
 
-  addNote() {
-    if (this.newNote.trim()) {
-      const date = new Date().toLocaleDateString('es-ES');
-      this.patient.evolutionNotes.unshift(`${date}: ${this.newNote}`);
-      this.patientsService.updatePatient(this.patient);
-      this.newNote = '';
-    }
-  }
-
-  getStatusColor(status: string): string {
-    switch (status) {
-      case 'pending':
-        return 'warning';
-      case 'in-progress':
-        return 'primary';
-      case 'completed':
-        return 'success';
-      default:
-        return 'medium';
-    }
-  }
-
-  getStatusText(status: string): string {
-    switch (status) {
-      case 'pending':
-        return 'Pendiente';
-      case 'in-progress':
-        return 'En Curso';
-      case 'completed':
-        return 'Finalizado';
-      default:
-        return 'Desconocido';
-    }
-  }
-
-  async changeAvatar() {
-    const actionSheet = await this.actionSheetCtrl.create({
-      header: 'Cambiar foto de perfil',
-      buttons: [
-        {
-          text: 'Tomar foto',
-          icon: 'camera',
-          handler: () => {
-            this.takePicture();
-          }
-        },
-        {
-          text: 'Elegir de la galería',
-          icon: 'image',
-          handler: () => {
-            this.chooseFromGallery();
-          }
-        },
-        {
-          text: 'Cancelar',
-          icon: 'close',
-          role: 'cancel'
-        }
-      ]
-    });
-    await actionSheet.present();
-  }
-
-  private async takePicture() {
-    try {
-      const image = await Camera.getPhoto({
-        quality: 80,
-        allowEditing: false,
-        resultType: CameraResultType.DataUrl,
-        source: CameraSource.Camera
-      });
-      if (image && image.dataUrl) {
-        this.patient.avatar = image.dataUrl;
-        this.patientsService.updatePatient(this.patient);
-      }
-    } catch (error) {
-      // Manejar error o cancelación
-    }
-  }
-
-  private async chooseFromGallery() {
-    try {
-      const image = await Camera.getPhoto({
-        quality: 80,
-        allowEditing: false,
-        resultType: CameraResultType.DataUrl,
-        source: CameraSource.Photos
-      });
-      if (image && image.dataUrl) {
-        this.patient.avatar = image.dataUrl;
-        this.patientsService.updatePatient(this.patient);
-      }
-    } catch (error) {
-      // Manejar error o cancelación
-    }
+  openPatient(patient: Patient) {
+    this.router.navigate(['/app/paciente-ficha', patient.id]);
   }
 } 

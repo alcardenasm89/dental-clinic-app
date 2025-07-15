@@ -61,7 +61,7 @@ export class PatientsService {
         phone: '+56 9 1234 5678',
         email: 'juan.perez@example.com',
         address: '1234 Calle Principal, Santiago',
-        avatar: 'assets/default-avatar.png',
+        avatar: '',
         emergencyContact: {
           name: 'María Pérez',
           phone: '+56 9 5678 1234',
@@ -97,7 +97,7 @@ export class PatientsService {
         phone: '+56 9 8765 4321',
         email: 'maria.garcia@example.com',
         address: '5678 Avenida Central, Santiago',
-        avatar: 'assets/default-avatar.png',
+        avatar: '',
         emergencyContact: {
           name: 'Pedro García',
           phone: '+56 9 4321 8765',
@@ -162,7 +162,7 @@ export class PatientsService {
         phone: user.phone,
         email: user.email,
         address: user.address?.street + ', ' + user.address?.city,
-        avatar: 'assets/default-avatar.png',
+        avatar: '',
         emergencyContact: {
           name: user.username,
           phone: user.phone,

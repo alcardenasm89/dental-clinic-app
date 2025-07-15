@@ -3,10 +3,53 @@ ion-menu {
   --background: var(--ion-color-light);
 }
 
+// Mejoras de accesibilidad
+ion-menu ion-item {
+  --ripple-color: var(--ion-color-primary);
+  --focus-background: var(--ion-color-primary-tint);
+  --focus-color: var(--ion-color-primary-contrast);
+  transition: all 0.2s ease;
+}
+
+ion-menu ion-item:focus {
+  outline: 2px solid var(--ion-color-primary);
+  outline-offset: 2px;
+  transform: translateX(4px);
+}
+
+ion-menu ion-item:focus-visible {
+  outline: 3px solid var(--ion-color-primary);
+  outline-offset: 2px;
+}
+
+// Mejorar la navegación por teclado
+ion-menu ion-item[tabindex]:focus {
+  background: var(--ion-color-primary-tint);
+  color: var(--ion-color-primary-contrast);
+}
+
+// Ocultar elementos decorativos de lectores de pantalla
+ion-menu ion-icon[aria-hidden="true"] {
+  pointer-events: none;
+}
+
+// Mejorar el contraste para accesibilidad
+ion-menu ion-item {
+  --color: var(--ion-color-dark);
+  --background: transparent;
+  --border-color: transparent;
+  
+  &.selected {
+    --background: var(--ion-color-primary);
+    --color: var(--ion-color-primary-contrast);
+    font-weight: 600;
+  }
+}
+
 .menu-header {
   text-align: center;
   padding: 24px 16px;
-  background: white;
+  background: var(--ion-color-light);
   margin-bottom: 16px;
   border-bottom: 1px solid var(--ion-color-light-shade);
 
@@ -76,7 +119,7 @@ ion-item {
   right: 0;
   text-align: center;
   padding: 16px;
-  background: white;
+  background: var(--ion-color-light);
   border-top: 1px solid var(--ion-color-light-shade);
 
   p {
@@ -91,10 +134,62 @@ ion-content {
 }
 
 ion-toolbar {
-  --background: white;
+  --background: var(--ion-color-light);
   --border-color: var(--ion-color-light-shade);
 }
 
 ion-menu-button {
   --color: var(--ion-color-primary);
+}
+
+// Estilos para modo oscuro
+@media (prefers-color-scheme: dark) {
+  ion-menu {
+    --background: var(--ion-color-dark);
+  }
+
+  .menu-header {
+    background: var(--ion-color-dark-shade);
+    border-bottom: 1px solid var(--ion-color-dark-tint);
+
+    h2 {
+      color: var(--ion-color-light);
+    }
+
+    p {
+      color: var(--ion-color-light-shade);
+    }
+  }
+
+  ion-item {
+    --color: var(--ion-color-light);
+    --focus-background: var(--ion-color-primary-tint);
+    --focus-color: var(--ion-color-primary-contrast);
+    
+    &:focus {
+      outline-color: var(--ion-color-primary);
+    }
+    
+    &:focus-visible {
+      outline-color: var(--ion-color-primary);
+    }
+  }
+
+  .menu-footer {
+    background: var(--ion-color-dark-shade);
+    border-top: 1px solid var(--ion-color-dark-tint);
+
+    p {
+      color: var(--ion-color-light-shade);
+    }
+  }
+
+  ion-content {
+    --background: var(--ion-color-dark);
+  }
+
+  ion-toolbar {
+    --background: var(--ion-color-dark);
+    --border-color: var(--ion-color-dark-tint);
+  }
 } 
