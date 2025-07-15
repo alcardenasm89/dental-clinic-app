@@ -17,6 +17,16 @@ android {
             ignoreAssetsPattern '!.svn:!.git:!.ds_store:!*.scc:.*:!CVS:!thumbs.db:!picasa.ini:!*~'
         }
     }
+
+    signingConfigs {
+        release {
+            storeFile file('my-release-key.jks')
+            storePassword 'clinicadental'
+            keyAlias 'my-key-alias'
+            keyPassword 'clinicadental'
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
