@@ -1,61 +1,24 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      Clínica Dental
-    </ion-title>
+    <ion-title>Clínica Dental</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="ion-padding">
-  <div class="login-container">
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title class="ion-text-center">Clínica Dental</ion-card-title>
-        <ion-card-subtitle class="ion-text-center">Iniciar Sesión</ion-card-subtitle>
-      </ion-card-header>
-
-      <ion-card-content>
-        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-          <ion-item [class.invalid-item]="email?.invalid && (email?.touched || submitted)">
-            <ion-label position="floating">Email</ion-label>
-            <ion-input 
-              type="email" 
-              formControlName="email"
-              placeholder="doctor@clinicadental.com">
-            </ion-input>
-          </ion-item>
-          <ion-note color="danger" *ngIf="email?.invalid && (email?.touched || submitted) && email?.errors?.['required']">
-            El email es requerido
-          </ion-note>
-          <ion-note color="danger" *ngIf="email?.invalid && (email?.touched || submitted) && email?.errors?.['email']">
-            Ingrese un email válido
-          </ion-note>
-
-          <ion-item [class.invalid-item]="password?.invalid && (password?.touched || submitted)">
-            <ion-label position="floating">Contraseña</ion-label>
-            <ion-input 
-              type="password" 
-              formControlName="password"
-              placeholder="123456">
-            </ion-input>
-          </ion-item>
-          <ion-note color="danger" *ngIf="password?.invalid && (password?.touched || submitted) && password?.errors?.['required']">
-            La contraseña es requerida
-          </ion-note>
-          <ion-note color="danger" *ngIf="password?.invalid && (password?.touched || submitted) && password?.errors?.['minlength']">
-            La contraseña debe tener al menos 6 caracteres
-          </ion-note>
-
-          <ion-button 
-            expand="block" 
-            type="submit" 
-            [disabled]="loginForm.invalid || isLoading"
-            class="ion-margin-top">
-            <ion-spinner *ngIf="isLoading" name="circular"></ion-spinner>
-            <span *ngIf="!isLoading">Iniciar Sesión</span>
-          </ion-button>
-        </form>
-      </ion-card-content>
-    </ion-card>
-  </div>
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Iniciar Sesión</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-label position="floating">Email</ion-label>
+        <ion-input type="email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Contraseña</ion-label>
+        <ion-input type="password"></ion-input>
+      </ion-item>
+      <ion-button expand="block">Iniciar Sesión</ion-button>
+    </ion-card-content>
+  </ion-card>
 </ion-content> 
