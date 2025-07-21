@@ -11,7 +11,7 @@ ion-content {
 }
 
 .login-container {
-  flex: 1;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -23,7 +23,7 @@ ion-content {
 ion-card {
   width: 100%;
   max-width: 400px;
-  margin: 0;
+  margin: 0 auto;
   border-radius: var(--app-border-radius);
   box-shadow: var(--app-card-shadow);
   background: white;

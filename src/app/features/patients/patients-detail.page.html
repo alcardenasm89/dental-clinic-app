@@ -16,10 +16,10 @@
       <div class="avatar-wrapper" (click)="changeAvatar()">
         <img *ngIf="patient.avatar" [src]="patient.avatar" alt="Avatar del paciente" class="patient-avatar">
         <ion-avatar *ngIf="!patient.avatar" class="patient-avatar">
-          <ion-icon name="person" size="large"></ion-icon>
+          <ion-icon name="person" size="large" aria-label="Perfil de usuario"></ion-icon>
         </ion-avatar>
         <div class="avatar-overlay">
-          <ion-icon name="camera"></ion-icon>
+          <ion-icon name="camera" aria-label="Cámara"></ion-icon>
         </div>
       </div>
       <h1 class="patient-name">{{ patient.name }}</h1>
@@ -37,7 +37,7 @@
             color="secondary" 
             (click)="getCurrentLocation()" 
             [disabled]="locationLoading">
-            <ion-icon name="location" slot="start"></ion-icon>
+            <ion-icon name="location" slot="start" aria-label="Ubicación"></ion-icon>
             <ion-spinner *ngIf="locationLoading" name="crescent" slot="start"></ion-spinner>
             {{ locationLoading ? 'Obteniendo ubicación...' : 'Registrar Ubicación Actual' }}
           </ion-button>
@@ -272,7 +272,7 @@
         </ion-item>
 
         <ion-button expand="block" (click)="addNote()" [disabled]="!newNote.trim()">
-          <ion-icon name="add-circle-outline" slot="start"></ion-icon>
+          <ion-icon name="add-circle-outline" slot="start" aria-label="Agregar"></ion-icon>
           Registrar Nota
         </ion-button>
       </ion-card-content>

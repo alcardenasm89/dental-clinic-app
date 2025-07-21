@@ -1,84 +1,81 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title>Agenda Diaria</ion-title>
-    <ion-buttons slot="end">
-      <ion-button (click)="toggleAddAppointment()">
-        <ion-icon slot="icon-only" name="add"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
+<div class="appointments-page">
+  <ion-header [translucent]="true">
+    <ion-toolbar>
+      <ion-title>Agenda</ion-title>
+    </ion-toolbar>
+  </ion-header>
 
-<ion-content [fullscreen]="true" class="ion-padding">
-  <!-- Título de Fecha -->
-  <div style="text-align:center; margin-bottom: 8px;">
-    <ion-label style="font-size: 1.1rem; font-weight: 500;">Fecha</ion-label>
-  </div>
-  <!-- Selector de fecha -->
-  <ion-item lines="none" style="justify-content: center;">
-    <ion-datetime 
-      [(ngModel)]="selectedDate" 
-      presentation="date"
-      locale="es-ES">
-    </ion-datetime>
-  </ion-item>
-
-  <!-- Formulario de nueva cita (con animación) -->
-  <div class="appointment-form" *ngIf="isAddingAppointment">
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title>Nueva Cita</ion-card-title>
-      </ion-card-header>
+  <ion-content [fullscreen]="true" class="ion-padding">
+    <!-- Selector de fecha con Ionic -->
+    <ion-card class="date-selector-card">
       <ion-card-content>
-        <ion-item>
-          <ion-label position="floating">Paciente</ion-label>
-          <ion-input type="text"></ion-input>
+        <label for="ion-datepicker" class="calendar-label">Fecha de la agenda</label>
+        <ion-item lines="none">
+          <ion-datetime
+            id="ion-datepicker"
+            presentation="date"
+            locale="es-ES"
+            [(ngModel)]="selectedDate"
+            (ionChange)="onDateChange($event)">
+          </ion-datetime>
         </ion-item>
-        <ion-item>
-          <ion-label position="floating">Tratamiento</ion-label>
-          <ion-input type="text"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label position="floating">Hora</ion-label>
-          <ion-datetime presentation="time"></ion-datetime>
-        </ion-item>
-        <ion-item>
-          <ion-label position="floating">Duración (minutos)</ion-label>
-          <ion-input type="number"></ion-input>
-        </ion-item>
-        <ion-button expand="block" class="ion-margin-top">Guardar Cita</ion-button>
       </ion-card-content>
     </ion-card>
-  </div>
 
-  <!-- Lista de citas -->
-  <ion-list>
-    <ion-item-group *ngFor="let appointment of appointments">
-      <ion-item-divider sticky>
-        <ion-label>{{ appointment.time }}</ion-label>
-      </ion-item-divider>
-      
-      <ion-item (click)="onAppointmentClick(appointment)" detail>
+    <!-- Lista de citas con Material Design -->
+    <div class="appointments-grid">
+      <mat-card 
+        *ngFor="let appointment of appointments" 
+        class="appointment-card"
+        [attr.data-appointment-id]="appointment.id"
+        (click)="onAppointmentClick(appointment)">
+        
+        <mat-card-header>
+          <mat-card-title>{{ appointment.name }}</mat-card-title>
+          <mat-card-subtitle>{{ appointment.time }}</mat-card-subtitle>
+        </mat-card-header>
+        
+        <mat-card-content>
+          <p>{{ appointment.reason }}</p>
+          <mat-chip [color]="getStatusColor(appointment.status)" selected>
+            {{ getStatusText(appointment.status) }}
+          </mat-chip>
+        </mat-card-content>
+        
+        <mat-card-actions>
+          <button mat-icon-button color="primary" aria-label="Ver detalles de la cita">
+            <mat-icon>visibility</mat-icon>
+          </button>
+          <button mat-icon-button color="accent" aria-label="Editar cita">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+
+    <!-- Lista tradicional de Ionic como fallback -->
+    <ion-list *ngIf="appointments.length > 0" class="appointments-list">
+      <ion-item 
+        *ngFor="let appointment of appointments" 
+        (click)="onAppointmentClick(appointment)"
+        [attr.data-appointment-id]="appointment.id"
+        class="appointment-item">
         <ion-label>
           <h2>{{ appointment.name }}</h2>
-          <p>{{ appointment.reason }}</p>
-          <p>
-            <ion-badge [color]="getStatusColor(appointment.status)">
-              {{ getStatusText(appointment.status) }}
-            </ion-badge>
-          </p>
+          <p>{{ appointment.time }} - {{ appointment.reason }}</p>
         </ion-label>
+        <ion-badge [color]="getStatusColor(appointment.status)">
+          {{ getStatusText(appointment.status) }}
+        </ion-badge>
       </ion-item>
-    </ion-item-group>
-  </ion-list>
+    </ion-list>
 
-  <!-- Mensaje si no hay citas -->
-  <div class="no-appointments" *ngIf="appointments.length === 0">
-    <ion-text color="medium">
-      <p>No hay citas programadas para este día</p>
+    <!-- Mensaje cuando no hay citas -->
+    <ion-text color="medium" *ngIf="!appointments.length">
+      <p class="ion-text-center">No hay citas programadas para esta fecha.</p>
     </ion-text>
-  </div>
-</ion-content> 
+
+    <!-- Mensaje de éxito -->
+    <div class="success-message" style="display: none;"></div>
+  </ion-content>
+</div> 
